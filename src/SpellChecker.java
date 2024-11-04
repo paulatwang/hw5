@@ -44,7 +44,7 @@ public class SpellChecker {
         * */
 
         /*
-        * Step 4:
+        * Step 4: paula
         * */
     }
   
