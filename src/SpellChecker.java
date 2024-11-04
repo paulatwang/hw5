@@ -44,9 +44,8 @@ public class SpellChecker {
         * */
 
         /*
-        * Step 4: angela
+        * Step 4: paula
         * */
-
     }
   
     // You can of course write other methods as well.
