@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WordRecommender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordRecommender.java" afterDir="false" />
-    </list>
+    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Added comments to WordRecommender" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,6 +51,15 @@
       <option name="presentableId" value="Default" />
       <updated>1730747419114</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added comments to WordRecommender">
+      <option name="closed" value="true" />
+      <created>1730750454221</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730750454221</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -66,5 +72,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added comments to WordRecommender" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments to WordRecommender" />
   </component>
 </project>
