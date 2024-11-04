@@ -45,7 +45,7 @@ public class SpellChecker {
 
         /*
         * Step 4: paula
-        * Changes in feature 2
+        * Making changes hehe
         * */
     }
   
