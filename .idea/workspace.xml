@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Added comments to WordRecommender" />
+    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Added name angela" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +59,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730750454221</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added name angela">
+      <option name="closed" value="true" />
+      <created>1730750776008</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730750776008</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -75,6 +83,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added comments to WordRecommender" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added comments to WordRecommender" />
+    <MESSAGE value="Added name angela" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added name angela" />
   </component>
 </project>
