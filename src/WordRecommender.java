@@ -28,8 +28,34 @@ public class WordRecommender {
     public double getSimilarity(String word1, String word2) {
         //Rank all replacements so that most "similar" word is recommended first, followed by second most similar etc.
         //Similarity based on "left-right similarity" - average of left similarity and right similarity
-        // TODO: change this!
-        return 0.0;
+        double left = 0.0;
+        double right = 0.0;
+        String shorter;
+        String longer;
+
+        // get shorter and longer word
+        if (word1.length() <= word2.length()) {
+            shorter = word1;
+            longer = word2;
+        }
+        else {
+            shorter = word2;
+            longer = word1;
+        }
+
+        // get similarity
+        String reversedShort = new StringBuilder(shorter).reverse().toString();
+        String reversedLong = new StringBuilder(longer).reverse().toString();
+        for (int i = 0; i < shorter.length(); i++){
+            if (shorter.charAt(i) == longer.charAt(i)) {
+                left ++;
+            }
+            if (reversedShort.charAt(i) == reversedLong.charAt(i)){
+                right ++;
+            }
+        }
+
+        return (left + right) / 2.0;
     }
   
     public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
