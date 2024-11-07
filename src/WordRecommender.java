@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 public class WordRecommender {
     private FileInputStream inputStream;
@@ -57,26 +55,27 @@ public class WordRecommender {
 
         return (left + right) / 2.0;
     }
-  
+
     public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
         /*
-        * Given an incorrect word, should return a list of legal word suggestions
-        *   - Inputs: tolerance = 2, commonPercent = 0.5, topN = 4
-        *   - Valid candidates: lengthDiff <= tolerance && common >= commonPercent
-        *   - Return: topN replacement candidates in increasing order of "left-right" similarity to the misspelled word
-        * */
+         * Given an incorrect word, should return a list of legal word suggestions
+         *   - Inputs: tolerance = 2, commonPercent = 0.5, topN = 4
+         *   - Valid candidates: lengthDiff <= tolerance && common >= commonPercent
+         *   - Return: topN replacement candidates in increasing order of "left-right" similarity to the misspelled word
+         * */
 
         ArrayList<String> candidates = new ArrayList<>();
 
         // add letters in word to wordSet
         HashSet<Character> wordSet = new HashSet<>();
-        for (char letter : word.toCharArray()){
+        for (char letter : word.toCharArray()) {
             wordSet.add(letter);
         }
 
+
         // find valid replacement candidates from dictionary
-        Scanner s1 = new Scanner(inputStream);
-        while (s1.hasNextLine()){
+        Scanner s1 = new Scanner(this.inputStream);
+        while (s1.hasNextLine()) {
             String dictWord = s1.nextLine();
 
             // calculate length
@@ -84,7 +83,7 @@ public class WordRecommender {
 
             // add letters in dictWord to dictSet
             HashSet<Character> dictSet = new HashSet<>();
-            for (char letter : dictWord.toCharArray()){
+            for (char letter : dictWord.toCharArray()) {
                 dictSet.add(letter);
             }
 
@@ -96,16 +95,32 @@ public class WordRecommender {
             double common = (double) intersection.size() / union.size();
 
             // add valid candidates to array
-            if (lengthDiff <= tolerance && common >= commonPercent){
+            if (lengthDiff <= tolerance && common >= commonPercent) {
                 candidates.add(dictWord);
             }
 
         }
 
         // rank replacements based on similarity
+        TreeMap<Double, ArrayList<String>> ranking = new TreeMap<>();
+        for (String candidate : candidates) {
+            double similarityScore = getSimilarity(word, candidate);
+            ranking.putIfAbsent(similarityScore, new ArrayList<>()); // if no rank exists, create one
+            ranking.get(similarityScore).add(candidate); // add candidate to rank
+        }
 
-        return null;
+        // get top N candidates in increasing order of similarity (least -> most)
+        ArrayList<String> topCandidates = new ArrayList<>();
+        while (topCandidates.size() < topN) {
+            Double topRank = ranking.lastKey();
+            for (String candidate : ranking.get(topRank)) {
+                topCandidates.add(0, candidate);
+            }
+            ranking.remove(topRank);
+        }
+
+        // return in increasing order of similarity
+        int size = topCandidates.size();
+        return new ArrayList<>(topCandidates.subList(size - 4, size));
     }
-  
-    
-  }
+}
