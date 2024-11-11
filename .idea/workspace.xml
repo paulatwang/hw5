@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Added name angela" />
+    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Made Feature3">
+      <change afterPath="$PROJECT_DIR$/testExample.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpellChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SpellChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WordRecommender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordRecommender.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Feature1" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -19,12 +29,12 @@
     &quot;assignee&quot;: &quot;paulatwang&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/paulatwang/hw5.git",
-    "accountId": "777b513e-1e9a-47ba-b24d-ee381b1dffcc"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/paulatwang/hw5.git&quot;,
+    &quot;accountId&quot;: &quot;777b513e-1e9a-47ba-b24d-ee381b1dffcc&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -36,8 +46,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.SpellCheckerRunner.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Feature3",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
@@ -67,7 +78,23 @@
       <option name="project" value="LOCAL" />
       <updated>1730750776008</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added making changes in new branch Feature1">
+      <option name="closed" value="true" />
+      <created>1730750985038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730750985038</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Made Feature3">
+      <option name="closed" value="true" />
+      <created>1730751634961</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730751634961</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -84,6 +111,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added comments to WordRecommender" />
     <MESSAGE value="Added name angela" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added name angela" />
+    <MESSAGE value="Added making changes in new branch Feature1" />
+    <MESSAGE value="Made Feature3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made Feature3" />
   </component>
 </project>

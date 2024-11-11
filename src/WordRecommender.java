@@ -7,7 +7,7 @@ public class WordRecommender {
     public WordRecommender(String dictionaryFile) {
         //Takes in the filename of the dictionary file and uses it to make recommendations
         // (should be able to accept any dictionary name, not just the default provided)
-        Scanner s = new Scanner(System.in);
+//        Scanner s = new Scanner(System.in);
         while (true) {
             try {
                 this.inputStream = new FileInputStream(dictionaryFile);
@@ -15,14 +15,14 @@ public class WordRecommender {
             } catch (FileNotFoundException e) {
                 System.err.println("There was an error in opening that file.");
                 System.out.println("Please enter the name of a file to use as a dictionary.");
-                dictionaryFile = s.nextLine(); // Prompt user for a new filename
+//                dictionaryFile = s.nextLine(); // Prompt user for a new filename
             }
         }
 
         System.out.println("Using the dictionary at '" + dictionaryFile + "'.");
-        s.close();
+//        s.close();
     }
-  
+
     public double getSimilarity(String word1, String word2) {
         //Rank all replacements so that most "similar" word is recommended first, followed by second most similar etc.
         //Similarity based on "left-right similarity" - average of left similarity and right similarity
@@ -109,15 +109,20 @@ public class WordRecommender {
             ranking.get(similarityScore).add(candidate); // add candidate to rank
         }
 
+        // if there are no replacements (AP)
+        if (ranking.isEmpty()) {
+            return null;
+        }
+
         // get top N candidates in increasing order of similarity (least -> most)
         ArrayList<String> topCandidates = new ArrayList<>();
-        while (topCandidates.size() < topN) {
-            Double topRank = ranking.lastKey();
-            for (String candidate : ranking.get(topRank)) {
-                topCandidates.add(0, candidate);
+        while (topCandidates.size() < topN && !ranking.isEmpty()) { //Added !ranking.isEmpty() (AP)
+                Double topRank = ranking.lastKey();
+                for (String candidate : ranking.get(topRank)) {
+                    topCandidates.add(0, candidate);
+                }
+                ranking.remove(topRank);
             }
-            ranking.remove(topRank);
-        }
 
         // return in increasing order of similarity
         int size = topCandidates.size();
