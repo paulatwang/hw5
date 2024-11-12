@@ -1,150 +1,115 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
 public class SpellChecker {
+    private static String dictionaryName;
+    private static String fileName;
+    private static String outputFileName;
 
     public SpellChecker() {
-      // TODO: You can modify the body of this constructor,
-      // or you can leave it blank. You must keep the signature, however.
     }
   
     public static void start() {
-      // TODO: You can modify the body of this method,
-      // or you can leave it blank. You must keep the signature, however.
-        String dictionaryName;
-        String fileName;
-        FileInputStream dictionaryInputStream;
-        FileInputStream fileInputStream;
-
-        /*
-         * Step1: prompt the user for filename for dictionary
-         * - if file doesn't exist, repeatedly prompt
-         * - if file does exist, print name
-         */
-
+        // Step1: READ DICTIONARY FILE
         Scanner input = new Scanner(System.in);
 
+        // open and read dictionary into hashset
+        HashSet<String> dictionaryWords = new HashSet<>();
         while (true) {
             System.out.printf(Util.DICTIONARY_PROMPT);
-            dictionaryName = input.next();
+            dictionaryName = input.next(); // store dictionary name
             try {
-                dictionaryInputStream = new FileInputStream(dictionaryName);
+                FileInputStream dictionaryInputStream = new FileInputStream(dictionaryName);
+                Scanner dictionaryInputReader = new Scanner(dictionaryInputStream);
                 System.out.printf(Util.DICTIONARY_SUCCESS_NOTIFICATION, dictionaryName);
+
+                // read dictionary words into hashset
+                while (dictionaryInputReader.hasNext()){
+                    dictionaryWords.add(dictionaryInputReader.next());
+                }
+                dictionaryInputReader.close();
                 break;
             } catch (FileNotFoundException e) {
                 System.out.printf(Util.FILE_OPENING_ERROR);
             }
         }
 
-
-            /*
-             *  Step 2: prompt the user for filename to be spellchecked
-             * -  if file doesn't exist, repeatedly prompt
-             * - if file does exist, print name of output file
-             */
-
-
+        // Step 2: OPEN FILE FOR SPELLCHECKING
+        // open file for spellchecking and create output file
         while (true) {
             System.out.printf(Util.FILENAME_PROMPT);
             fileName = input.next();
             try {
-                fileInputStream = new FileInputStream(fileName);
-                System.out.printf(Util.FILE_SUCCESS_NOTIFICATION, fileName, fileName + "_check.txt");
+                FileInputStream fileInputStream = new FileInputStream(fileName);
+                outputFileName = fileName.substring(0, fileName.length() - 4) + "_check.txt"; // added output filename (PW)
+                FileOutputStream output = new FileOutputStream(outputFileName);
+                PrintWriter writer = new PrintWriter(output);
+                Scanner fileInputReader = new Scanner(fileInputStream);
+
+                System.out.printf(Util.FILE_SUCCESS_NOTIFICATION, fileName, outputFileName);
+
+                // STEP 3: DO SPELL CHECKING
+                // initialize word recommender and parameters for its methods
+                WordRecommender dictionaryList = new WordRecommender(dictionaryName);
+                int tolerance = 2;
+                double commonPercent = 0.5;
+                int topN = 4;
+
+                // read words from file
+                while (fileInputReader.hasNext()) {
+                    String word = fileInputReader.next();
+                    if (!dictionaryWords.contains(word)) {
+                        System.out.printf(Util.MISSPELL_NOTIFICATION, word);
+                        ArrayList<String> suggestions = dictionaryList.getWordSuggestions(word, tolerance, commonPercent, topN);
+
+                        // if no suggestions
+                        if (suggestions == null) {
+                            System.out.printf(Util.NO_SUGGESTIONS);
+                            System.out.printf(Util.TWO_OPTION_PROMPT); // prompt for choice
+                        } else {
+                            System.out.printf(Util.FOLLOWING_SUGGESTIONS);
+                            for (int i = 0; i < topN; i++) {
+                                System.out.printf(Util.SUGGESTION_ENTRY, i + 1, suggestions.get(i)); // print suggestions
+                            }
+                            System.out.printf(Util.THREE_OPTION_PROMPT); // prompt for choice
+                        }
+
+                        // get user selection for misspelling options
+                        String letterChoice = input.next();
+                        while (true){
+                            if (letterChoice.equals("r")) {
+                                System.out.printf(Util.AUTOMATIC_REPLACEMENT_PROMPT);
+                                word = suggestions.get(input.nextInt() - 1);
+                                break; // replace with selection
+                            }
+                            if (letterChoice.equals("a")) {
+                                break; // add as is
+                            }
+                            if (letterChoice.equals("t")) {
+                                System.out.printf(Util.MANUAL_REPLACEMENT_PROMPT);
+                                word = input.next(); // replace with next user input
+                                break;
+                            }
+                            System.out.printf(Util.INVALID_RESPONSE);
+                            letterChoice = input.next();
+                        }
+
+                    }
+                    // write to file
+                    writer.printf("%s ", word);
+                }
+                // file complete!
+                writer.close();
+                fileInputReader.close();
+                System.out.printf("Spellchecking complete. Output written to %s%n", outputFileName);
                 break;
             } catch (FileNotFoundException e) {
                 System.out.printf(Util.FILE_OPENING_ERROR);
             }
         }
-
-        FileOutputStream output = null;
-        try {
-            output = new FileOutputStream(fileName + "_check.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
-        PrintWriter writer = new PrintWriter(output);
-
-            HashSet<String> dictionaryWords = new HashSet<>();
-            Scanner dictionaryInputReader = new Scanner(dictionaryInputStream);
-            while (dictionaryInputReader.hasNext()){
-                String word = dictionaryInputReader.next();
-                dictionaryWords.add(word);
-            }
-            dictionaryInputReader.close();
-
-            Scanner fileInputReader = new Scanner(fileInputStream);
-            Scanner inputLetter = new Scanner(System.in);
-            WordRecommender dictionaryList = new WordRecommender(dictionaryName);
-            int tolerance = 2;
-            double commonPercent = 0.5;
-            int topN = 4;
-
-            while (fileInputReader.hasNext()) {
-                String word = fileInputReader.next();
-                if (!dictionaryWords.contains(word)) {
-                    System.out.printf(Util.MISSPELL_NOTIFICATION, word);
-                    System.out.printf(Util.FOLLOWING_SUGGESTIONS);
-                    ArrayList<String> suggestions = dictionaryList.getWordSuggestions(word, tolerance, commonPercent, topN);
-
-                    if (suggestions == null) {
-                        System.out.printf(Util.NO_SUGGESTIONS);
-                        System.out.printf(Util.TWO_OPTION_PROMPT);
-                    } else {
-                        for (int i = 0; i < topN; i++) {
-                            System.out.printf(Util.SUGGESTION_ENTRY, i + 1, suggestions.get(i));
-
-                        }
-                        System.out.printf(Util.THREE_OPTION_PROMPT);
-                    }
-
-                    String letterChoice = input.next();
-
-                    if (letterChoice.equals("r")) {
-                        System.out.printf(Util.AUTOMATIC_REPLACEMENT_PROMPT);
-                        int replacement = input.nextInt();
-                        word = suggestions.get(replacement - 1);
-                    }
-                    if (letterChoice.equals("a")) {
-                        word = word;
-                    }
-                    if (letterChoice.equals("t")) {
-                        System.out.printf(Util.MANUAL_REPLACEMENT_PROMPT);
-                        word = input.next();
-                    }
-                    if (!letterChoice.equals("r")&& !letterChoice.equals("a") && !letterChoice.equals("t")) {
-                        System.out.printf(Util.INVALID_RESPONSE);
-                    }
-                }
-                writer.printf("%s ", word);
-            }
-        fileInputReader.close();
         input.close();
-        writer.close();
-
-            /*
-             * Step 3: Do spell checking
-             * - iterate through each word in the spellchecked file
-             * - if the word is in the dictionary file, add to output file
-             * - if the word is not in dictionary file, prompt user to select 'r', 'a', or 't'
-             *   - if 'r':
-             *       - identify suggested words for replacement (call WordRecommender)
-             *       - prompt user to select replacement, repeatedly prompt if input invalid
-             *       - replace word in output file
-             *       - if no suggestions available, then prompt user to reselect 'a' or 't'
-             *   - if 'a':
-             *       - leave misspelled word unchanged
-             *       - add word to output file
-             *   - if 't':
-             *       - prompt user for new spelling
-             *       - replace word in output file
-             * */
-
         }
-
-    // You can of course write other methods as well.
   }
