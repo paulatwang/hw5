@@ -2,25 +2,27 @@ import java.io.*;
 import java.util.*;
 
 public class WordRecommender {
-    private FileInputStream inputStream;
+    ArrayList<String> dictWords;
 
     public WordRecommender(String dictionaryFile) {
         //Takes in the filename of the dictionary file and uses it to make recommendations
-        // (should be able to accept any dictionary name, not just the default provided)
-//        Scanner s = new Scanner(System.in);
         while (true) {
             try {
-                this.inputStream = new FileInputStream(dictionaryFile);
-                break; // exit loop if file is successfully found and opened
+                this.dictWords = new ArrayList<>();
+                FileInputStream dictStream = new FileInputStream(dictionaryFile);
+                Scanner dictScan = new Scanner(dictStream);
+
+                while (dictScan.hasNext()){
+                    this.dictWords.add(dictScan.next());
+                }
+                dictScan.close();
+                System.out.println("Using the dictionary at '" + dictionaryFile + "'.");
+                break;
             } catch (FileNotFoundException e) {
-                System.err.println("There was an error in opening that file.");
-                System.out.println("Please enter the name of a file to use as a dictionary.");
-//                dictionaryFile = s.nextLine(); // Prompt user for a new filename
+                System.out.printf(Util.FILE_OPENING_ERROR);
+                System.out.println(Util.DICTIONARY_PROMPT);
             }
         }
-
-        System.out.println("Using the dictionary at '" + dictionaryFile + "'.");
-//        s.close();
     }
 
     public double getSimilarity(String word1, String word2) {
@@ -52,7 +54,6 @@ public class WordRecommender {
                 right ++;
             }
         }
-
         return (left + right) / 2.0;
     }
 
@@ -63,7 +64,6 @@ public class WordRecommender {
          *   - Valid candidates: lengthDiff <= tolerance && common >= commonPercent
          *   - Return: topN replacement candidates in increasing order of "left-right" similarity to the misspelled word
          * */
-
         ArrayList<String> candidates = new ArrayList<>();
 
         // add letters in word to wordSet
@@ -72,12 +72,8 @@ public class WordRecommender {
             wordSet.add(letter);
         }
 
-
         // find valid replacement candidates from dictionary
-        Scanner s1 = new Scanner(this.inputStream);
-        while (s1.hasNextLine()) {
-            String dictWord = s1.nextLine();
-
+        for (String dictWord : dictWords){
             // calculate length
             int lengthDiff = Math.abs(dictWord.length() - word.length());
 
@@ -98,7 +94,6 @@ public class WordRecommender {
             if (lengthDiff <= tolerance && common >= commonPercent) {
                 candidates.add(dictWord);
             }
-
         }
 
         // rank replacements based on similarity
