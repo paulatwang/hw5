@@ -116,7 +116,7 @@ public class SpellChecker {
                         System.out.printf(Util.MANUAL_REPLACEMENT_PROMPT);
                         word = input.next();
                     }
-                    if (!letterChoice.equals("r")|| !letterChoice.equals("a") || !letterChoice.equals("t")) {
+                    if (!letterChoice.equals("r")&& !letterChoice.equals("a") && !letterChoice.equals("t")) {
                         System.out.printf(Util.INVALID_RESPONSE);
                     }
                 }

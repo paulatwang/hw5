@@ -74,8 +74,8 @@ public class WordRecommender {
 
 
         // find valid replacement candidates from dictionary
-        Scanner s1 = new Scanner(this.inputStream);
-        while (s1.hasNextLine()) {
+            Scanner s1 = new Scanner(this.inputStream);
+            while (s1.hasNextLine()) {
             String dictWord = s1.nextLine();
 
             // calculate length

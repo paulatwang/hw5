@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Made Feature3">
-      <change afterPath="$PROJECT_DIR$/testExample.txt" afterDir="false" />
+    <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Populated SpellChecker and adjusted WordRecommender in the case of no suggested words. Bug outstanding: repeated words has an empty array for suggested words">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SpellChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SpellChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WordRecommender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordRecommender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testExample.txt_check.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testExample.txt_check.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730751634961</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Populated SpellChecker and adjusted WordRecommender in the case of no suggested words. Bug outstanding: repeated words has an empty array for suggested words">
+      <option name="closed" value="true" />
+      <created>1731279696510</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731279696510</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,6 +120,7 @@
     <MESSAGE value="Added name angela" />
     <MESSAGE value="Added making changes in new branch Feature1" />
     <MESSAGE value="Made Feature3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made Feature3" />
+    <MESSAGE value="Populated SpellChecker and adjusted WordRecommender in the case of no suggested words. Bug outstanding: repeated words has an empty array for suggested words" />
+    <option name="LAST_COMMIT_MESSAGE" value="Populated SpellChecker and adjusted WordRecommender in the case of no suggested words. Bug outstanding: repeated words has an empty array for suggested words" />
   </component>
 </project>
