@@ -2,6 +2,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SpellChecker {
@@ -82,8 +83,21 @@ public class SpellChecker {
                         while (true){
                             if (letterChoice.equals("r")) {
                                 System.out.printf(Util.AUTOMATIC_REPLACEMENT_PROMPT);
-                                word = suggestions.get(input.nextInt() - 1);
-                                break; // replace with selection
+                                while (true) {
+                                    try {
+                                        int intChoice = input.nextInt();
+                                        if (intChoice > 0 && intChoice < suggestions.size()) {
+                                            word = suggestions.get(intChoice - 1); // replace with selection
+                                        } else {
+                                            System.out.println("Invalid input. Please enter a number from 1 - 4.");
+                                        }
+                                        break;
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Invalid input. Please enter a number.");
+                                        input.next();
+                                    }
+                                }
+                                break;
                             }
                             if (letterChoice.equals("a")) {
                                 break; // add as is

@@ -107,11 +107,10 @@ public class WordRecommender {
         // if there are no replacements (AP)
         if (ranking.isEmpty()) {
             return null;
-        }
-
-        // get top N candidates in increasing order of similarity (least -> most)
-        ArrayList<String> topCandidates = new ArrayList<>();
-        while (topCandidates.size() < topN && !ranking.isEmpty()) { //Added !ranking.isEmpty() (AP)
+        } else {
+            // get top N candidates in increasing order of similarity (least -> most)
+            ArrayList<String> topCandidates = new ArrayList<>();
+            while (topCandidates.size() < topN && !ranking.isEmpty()) { //included !ranking.isEmpty() (AP)
                 Double topRank = ranking.lastKey();
                 for (String candidate : ranking.get(topRank)) {
                     topCandidates.add(0, candidate);
@@ -119,8 +118,9 @@ public class WordRecommender {
                 ranking.remove(topRank);
             }
 
-        // return in increasing order of similarity
-        int size = topCandidates.size();
-        return new ArrayList<>(topCandidates.subList(size - 4, size));
+            // return in increasing order of similarity
+            int size = topCandidates.size();
+            return new ArrayList<>(topCandidates.subList(size - Math.min(4,size), size)); //Changed subList start to math.min(4,size) in the event there are less than 4 suggestions (AP)
+        }
     }
 }
