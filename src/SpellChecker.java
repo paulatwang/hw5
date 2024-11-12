@@ -1,6 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,7 +16,7 @@ public class SpellChecker {
         // Step1: READ DICTIONARY FILE
         Scanner input = new Scanner(System.in);
 
-        // open dictionary
+        // open and read dictionary into hashset
         HashSet<String> dictionaryWords = new HashSet<>();
         while (true) {
             System.out.printf(Util.DICTIONARY_PROMPT);
@@ -100,8 +98,10 @@ public class SpellChecker {
                         }
 
                     }
+                    // write to file
                     writer.printf("%s ", word);
                 }
+                // file complete!
                 writer.close();
                 fileInputReader.close();
                 System.out.printf("Spellchecking complete. Output written to %s%n", outputFileName);
