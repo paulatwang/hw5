@@ -67,7 +67,7 @@ public class SpellChecker {
                         ArrayList<String> suggestions = dictionaryList.getWordSuggestions(word, tolerance, commonPercent, topN);
 
                         // if no suggestions
-                        if (suggestions == null) {
+                        if (suggestions.isEmpty()) {
                             System.out.printf(Util.NO_SUGGESTIONS);
                             System.out.printf(Util.TWO_OPTION_PROMPT);
 
