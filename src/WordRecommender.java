@@ -94,7 +94,13 @@ public class WordRecommender {
             intersection.retainAll(dictSet);
             HashSet<Character> union = new HashSet<>(wordSet);
             union.addAll(dictSet);
-            double common = (double) intersection.size() / union.size();
+            double common = 0.0;
+            try {
+                common = (double) intersection.size() / union.size();
+            } catch (NullPointerException e) {
+                break;
+            }
+
 
             // add valid candidates to array
             if (lengthDiff <= tolerance && common >= commonPercent) {
