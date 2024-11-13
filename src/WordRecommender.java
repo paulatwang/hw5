@@ -117,25 +117,20 @@ public class WordRecommender {
         }
 
         // if there are no replacements (AP)
-        if (ranking.isEmpty()) {
-            return null;
-        } else {
-            // get top N candidates in increasing order of similarity (least -> most)
-            ArrayList<String> topCandidates = new ArrayList<>();
-            while (topCandidates.size() < topN && !ranking.isEmpty()) { //included !ranking.isEmpty() (AP)
-                Double topRank = ranking.lastKey();
-                for (String candidate : ranking.get(topRank)) {
-                    if (topCandidates.size() >= topN) {
-                        break;
-                    }
-                    topCandidates.add(candidate); // add to the end
+        ArrayList<String> topCandidates = new ArrayList<>();
+        while (topCandidates.size() < topN && !ranking.isEmpty()) { //included !ranking.isEmpty() (AP)
+            Double topRank = ranking.lastKey();
+            for (String candidate : ranking.get(topRank)) {
+                if (topCandidates.size() >= topN) {
+                    break;
                 }
-                ranking.remove(topRank);
+                topCandidates.add(candidate); // add to the end
             }
+            ranking.remove(topRank);
+        }
 
-            // return in increasing order of similarity
-            return topCandidates;
+        // return in increasing order of similarity
+        return topCandidates;
 
         }
     }
-}
