@@ -45,7 +45,7 @@ public class SpellChecker {
             fileName = input.next();
             try {
                 FileInputStream fileInputStream = new FileInputStream(fileName);
-                outputFileName = fileName.substring(0, fileName.length() - 4) + "_chk.txt"; // added output filename (PW)
+                outputFileName = fileName.substring(0, fileName.length() - 4) + "_chk.txt";
                 FileOutputStream output = new FileOutputStream(outputFileName);
                 PrintWriter writer = new PrintWriter(output);
                 Scanner fileInputReader = new Scanner(fileInputStream);
