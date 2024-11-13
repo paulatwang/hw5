@@ -45,7 +45,7 @@ public class SpellChecker {
             fileName = input.next();
             try {
                 FileInputStream fileInputStream = new FileInputStream(fileName);
-                outputFileName = fileName.substring(0, fileName.length() - 4) + "_check.txt"; // added output filename (PW)
+                outputFileName = fileName.substring(0, fileName.length() - 4) + "_chk.txt"; // added output filename (PW)
                 FileOutputStream output = new FileOutputStream(outputFileName);
                 PrintWriter writer = new PrintWriter(output);
                 Scanner fileInputReader = new Scanner(fileInputStream);
@@ -69,47 +69,63 @@ public class SpellChecker {
                         // if no suggestions
                         if (suggestions == null) {
                             System.out.printf(Util.NO_SUGGESTIONS);
-                            System.out.printf(Util.TWO_OPTION_PROMPT); // prompt for choice
-                        } else {
+                            System.out.printf(Util.TWO_OPTION_PROMPT);
+
+                            // prompt for 'a' or 't'
+                            while (true){
+                                String letterChoice = input.next();
+                                if (letterChoice.equals("a")) {
+                                    break;
+                                }
+                                if (letterChoice.equals("t")){
+                                    System.out.printf(Util.MANUAL_REPLACEMENT_PROMPT);
+                                    word = input.next(); // replace with next user input
+                                    break;
+                                }
+                                System.out.printf(Util.INVALID_RESPONSE);
+                            }
+
+
+                        } else { // if suggestions exist
                             System.out.printf(Util.FOLLOWING_SUGGESTIONS);
                             for (int i = 0; i < topN; i++) {
                                 System.out.printf(Util.SUGGESTION_ENTRY, i + 1, suggestions.get(i)); // print suggestions
                             }
-                            System.out.printf(Util.THREE_OPTION_PROMPT); // prompt for choice
+                            System.out.printf(Util.THREE_OPTION_PROMPT);
+
+                            // prompt for 'r', 'a', 't'
+                            while (true){
+                                String letterChoice = input.next();
+                                if (letterChoice.equals("r")) {
+                                    System.out.printf(Util.AUTOMATIC_REPLACEMENT_PROMPT);
+                                    while (true) {
+                                        try {
+                                            int intChoice = input.nextInt();
+                                            if (intChoice > 0 && intChoice < suggestions.size()) {
+                                                word = suggestions.get(intChoice - 1); // replace with selection
+                                            } else {
+                                                System.out.printf(Util.INVALID_RESPONSE);
+                                            }
+                                            break;
+                                        } catch (InputMismatchException e) {
+                                            System.out.printf(Util.INVALID_RESPONSE);
+                                            input.next();
+                                        }
+                                    }
+                                    break;
+                                }
+                                if (letterChoice.equals("a")) {
+                                    break; // add as is
+                                }
+                                if (letterChoice.equals("t")) {
+                                    System.out.printf(Util.MANUAL_REPLACEMENT_PROMPT);
+                                    word = input.next(); // replace with next user input
+                                    break;
+                                }
+                                System.out.printf(Util.INVALID_RESPONSE);
+                            }
                         }
 
-                        // get user selection for misspelling options
-                        String letterChoice = input.next();
-                        while (true){
-                            if (letterChoice.equals("r")) {
-                                System.out.printf(Util.AUTOMATIC_REPLACEMENT_PROMPT);
-                                while (true) {
-                                    try {
-                                        int intChoice = input.nextInt();
-                                        if (intChoice > 0 && intChoice < suggestions.size()) {
-                                            word = suggestions.get(intChoice - 1); // replace with selection
-                                        } else {
-                                            System.out.println("Invalid input. Please enter a number from 1 - 4.");
-                                        }
-                                        break;
-                                    } catch (InputMismatchException e) {
-                                        System.out.println("Invalid input. Please enter a number.");
-                                        input.next();
-                                    }
-                                }
-                                break;
-                            }
-                            if (letterChoice.equals("a")) {
-                                break; // add as is
-                            }
-                            if (letterChoice.equals("t")) {
-                                System.out.printf(Util.MANUAL_REPLACEMENT_PROMPT);
-                                word = input.next(); // replace with next user input
-                                break;
-                            }
-                            System.out.printf(Util.INVALID_RESPONSE);
-                            letterChoice = input.next();
-                        }
 
                     }
                     // write to file
