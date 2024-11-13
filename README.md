@@ -16,3 +16,4 @@ It will prompt the user with a number of ways to fix the misspelled word and wri
 - Unit Testing
 
 #### Git log
+<img width="1440" alt="Screenshot 2024-11-13 at 14 39 27" src="https://github.com/user-attachments/assets/50a43fac-312f-481f-b1f8-7da8175cdab0">
