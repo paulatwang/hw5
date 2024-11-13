@@ -16,7 +16,6 @@ public class WordRecommender {
                     this.dictWords.add(dictScan.next());
                 }
                 dictScan.close();
-                System.out.println("Using the dictionary at '" + dictionaryFile + "'.");
                 break;
             } catch (FileNotFoundException e) {
                 System.out.printf(Util.FILE_OPENING_ERROR);
@@ -129,8 +128,8 @@ public class WordRecommender {
             }
 
             // return in increasing order of similarity
-            int size = topCandidates.size();
-            return new ArrayList<>(topCandidates.subList(size - Math.min(topN,size), size)); //Changed subList start to math.min(4,size) in the event there are less than 4 suggestions (AP)
+            return topCandidates;
+
         }
     }
 }
