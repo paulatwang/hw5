@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="980e9483-9ef8-4f69-922e-9db805dec78f" name="Changes" comment="Minor changes + added test.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sampleDictionary.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sampleDictionary.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WordRecommender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordRecommender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WordRecommenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordRecommenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpellChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SpellChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testExample.txt_check.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testExample_check.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,32 +52,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.SpellCheckerRunner.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.WordRecommenderTest.executor": "Run",
-    "JUnit.WordRecommenderTest.testCapitalWord.executor": "Run",
-    "JUnit.WordRecommenderTest.testCommonPercent.executor": "Run",
-    "JUnit.WordRecommenderTest.testHighTolerance.executor": "Run",
-    "JUnit.WordRecommenderTest.testLowTolerance.executor": "Run",
-    "JUnit.WordRecommenderTest.testNoSuggestions.executor": "Debug",
-    "JUnit.WordRecommenderTest.testSimilarityMorbitForbid.executor": "Run",
-    "JUnit.WordRecommenderTest.testToleranceAndCommonPercentAdd.executor": "Run",
-    "JUnit.WordRecommenderTest.testToleranceAndLowerCommonPercent.executor": "Run",
-    "JUnit.WordRecommenderTest.testTopN.executor": "Run",
-    "JUnit.WordRecommenderTest.testWordAutomagically.executor": "Run",
-    "JUnit.WordRecommenderTest.testWordMorbit.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "bugs",
-    "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.SpellCheckerRunner.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.WordRecommenderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testCapitalWord.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testCommonPercent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testHighTolerance.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testLowTolerance.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testNoSuggestions.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.WordRecommenderTest.testSimilarityMorbitForbid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testToleranceAndCommonPercentAdd.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testToleranceAndLowerCommonPercent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testTopN.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testWordAutomagically.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WordRecommenderTest.testWordMorbit.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;bugs&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="WordRecommender dictionaryList = new WordRecommender(dictionaryName)" />
