@@ -28,6 +28,9 @@ public class WordRecommender {
     public double getSimilarity(String word1, String word2) {
         //Rank all replacements so that most "similar" word is recommended first, followed by second most similar etc.
         //Similarity based on "left-right similarity" - average of left similarity and right similarity
+        word1 = word1.toLowerCase();
+        word2 = word2.toLowerCase();
+
         double left = 0.0;
         double right = 0.0;
         String shorter;
@@ -64,12 +67,16 @@ public class WordRecommender {
          *   - Valid candidates: lengthDiff <= tolerance && common >= commonPercent
          *   - Return: topN replacement candidates in increasing order of "left-right" similarity to the misspelled word
          * */
+
         ArrayList<String> candidates = new ArrayList<>();
 
         // add letters in word to wordSet
         HashSet<Character> wordSet = new HashSet<>();
         for (char letter : word.toCharArray()) {
-            wordSet.add(letter);
+            if (Character.isLetter(letter)){ // filters out non-alphabetical characters
+                letter = Character.toLowerCase(letter); // convert to lowercase
+                wordSet.add(letter);
+            }
         }
 
         // find valid replacement candidates from dictionary
@@ -113,14 +120,17 @@ public class WordRecommender {
             while (topCandidates.size() < topN && !ranking.isEmpty()) { //included !ranking.isEmpty() (AP)
                 Double topRank = ranking.lastKey();
                 for (String candidate : ranking.get(topRank)) {
-                    topCandidates.add(0, candidate);
+                    if (topCandidates.size() >= topN) {
+                        break;
+                    }
+                    topCandidates.add(candidate); // add to the end
                 }
                 ranking.remove(topRank);
             }
 
             // return in increasing order of similarity
             int size = topCandidates.size();
-            return new ArrayList<>(topCandidates.subList(size - Math.min(4,size), size)); //Changed subList start to math.min(4,size) in the event there are less than 4 suggestions (AP)
+            return new ArrayList<>(topCandidates.subList(size - Math.min(topN,size), size)); //Changed subList start to math.min(4,size) in the event there are less than 4 suggestions (AP)
         }
     }
 }
