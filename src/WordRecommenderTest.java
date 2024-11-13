@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,6 +19,16 @@ public class WordRecommenderTest {
         double expected = input1.length();
         double actual = similarityTest.getSimilarity(input1, input2);
         assertEquals(expected, actual, "Similarity should be length of the word.");
+    }
+
+    //Test when the two words are the same but with capitalization difference
+    @Test
+    public void testSimilarityCapitalization() {
+        String input1 = "identical";
+        String input2 = "Identical";
+        double expected = input1.length();
+        double actual = similarityTest.getSimilarity(input1, input2);
+        assertEquals(expected, actual, "Similarity should not change based on capitalization.");
     }
 
     //Test when the two words are completely different
@@ -99,39 +109,55 @@ public class WordRecommenderTest {
         assertEquals(expected, actual, "Suggestion should be white");
     }
 
-    //Test expected tolerance and commonPercent
+    //Test tolerance
     @Test
-    public void testToleranceAndCommonPercent(){
+    public void testLowTolerance(){
+        String word = "bun";
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("ban"));
+        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, 0, commonPercent, topN);
+        assertEquals(expected, actual, "Suggestion should be ban only");
+    }
+
+    @Test
+    public void testHighTolerance(){
+        String word = "bun";
+        HashSet<String> expected = new HashSet<String>(Arrays.asList("bunny", "ban"));
+        ArrayList<String> actualOutput = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
+        HashSet<String> actual = new HashSet<>();
+        for (String output : actualOutput) {
+            actual.add(output);
+        }
+        assertEquals(expected, actual, "Suggestion should be ban and bunny");
+    }
+
+    //Test commonPercent
+    @Test
+    public void testHighCommonPercent(){
         String word = "bun";
         ArrayList<String> expected = new ArrayList<String>(Arrays.asList("bunny"));
-        tolerance = 2;
-        commonPercent = 0.6;
-        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
+        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, tolerance, 0.7, topN);
         assertEquals(expected, actual, "Suggestion should be bunny only");
     }
 
     @Test
-    public void testToleranceAndLowerCommonPercent(){
+    public void testLowCommonPercent(){
         String word = "bun";
-        TreeSet<String> expected = new TreeSet<>(Arrays.asList("bunny", "gum", "rut", "sum"));
-        tolerance = 2;
-        commonPercent = 0.2;
-        ArrayList<String> actualOutput = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
-        TreeSet<String> actual = new TreeSet<>();
-        for (int i = 0; i < actualOutput.size(); i++) {
-            actual.add(actualOutput.get(i));
+        HashSet<String> expected = new HashSet<>(Arrays.asList("ban", "bunny", "gum", "rut"));
+        ArrayList<String> actualOutput = suggestionsTest.getWordSuggestions(word, tolerance, 0.2, topN);
+        HashSet<String> actual = new HashSet<>();
+        for (String output : actualOutput) {
+            actual.add(output);
         }
-        assertEquals(expected, actual, "Suggestion should be bunny, gum, rut, sum");
+        assertEquals(expected, actual, "Suggestion should be ban, bunny, gum, rut");
     }
 
     //Test topN suggestions
     @Test
     public void testTopN(){
         String word = "bun";
-        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("bunny"));
-        topN = 1;
-        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
-        assertEquals(expected, actual, "Suggestion should be bunny only");
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("ban"));
+        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, tolerance, 0.2, 1);
+        assertEquals(expected, actual, "Suggestion should be ban only");
     }
 
     //Test when the word provided is already in the dictionary
@@ -148,8 +174,6 @@ public class WordRecommenderTest {
     public void testSimilarityOrder() {
         String word = "bun";
         int expected = 0;
-        commonPercent = 0.2;
-
         ArrayList<String> actualOutput = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
         double mostSimilar = 0;
         int wordSimilarityIndex = 0;
@@ -163,5 +187,24 @@ public class WordRecommenderTest {
         int actual = wordSimilarityIndex;
         assertEquals(expected, actual, "Index should be 0 for both");
     }
+
+    //Test when word contains non-alphabetical characters
+    @Test
+    public void testNonAlphabeticalWord(){
+        String word = "p3p";
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("pop"));
+        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
+        assertEquals(expected, actual, "Suggestion should be pop only");
+    }
+
+    //Test when word contains capitalized characters
+    @Test
+    public void testCapitalWord(){
+        String word = "POP";
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("pop"));
+        ArrayList<String> actual = suggestionsTest.getWordSuggestions(word, tolerance, commonPercent, topN);
+        assertEquals(expected, actual, "Suggestion should be pop only");
+    }
+
 
 }
